@@ -33,24 +33,17 @@
 <body>
 	<h1 class="text-center title">Collection Selector</h1>
 
-	<form id="discogs-form">
-		<div class="input-group mb-3">
-			<input id="username-input" class="username-input" type="text"
+	<form id="discogs-form form-inline">
+		<div class="form-group mb-3 text-center">
+			<input id="username-input" class="form-control col-xs-3 mb-3" type="text"
 				placeholder="Discogs username">
-			<div class="input-group-prepend">
+			<div class="form-group">
 				<button id="random-release" class="btn btn-primary random-release" type="submit">Random release</button>
 			</div>
 		</div>
 	</form>
 
-	<div id="release-container">
-		<div class="release-card">
-			<h2 id="artist-name"></h2>
-			<p id="release-name"></p>
-			<p id="record-label"></p>
-		</div>
-	</div>
-
+	<div id="response-card-holder"></div>
 	<script src="assets/js/scripts.js"></script>
 
 	<!-- Jquery -->
