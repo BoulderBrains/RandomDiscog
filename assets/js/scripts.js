@@ -14,12 +14,6 @@ $(document).ready(function () {
 				const release = response.releases[Math.floor(Math.random() * response.releases.length)];
 				console.log("release info:", release)
 
-				// Storing the information I want off the response
-				const artistName = release.basic_information.artists[0].name;
-				const releaseName = release.basic_information.title;
-				const recordLabel = release.basic_information.labels[0].name;
-				const releaseImage = release.basic_information.cover_image;
-
 				// Building a bootstrap card for release display
 				const responseCard = $("<div id='response-card' class='card'>");
 				const responseCardImage = $("<img id='release-cover' class='card-img-top'>");
@@ -28,6 +22,17 @@ $(document).ready(function () {
 				const artistNameContainer = $("<h3 id='artist-name' class='card-title'>");
 				const releaseNameContainer = $("<h5 id='release-name' class='card-text'>");
 				const recordLabelContainer = $("<p id='record-label' class='card-text'>");
+
+				console.log(cardBody);
+				console.log(artistNameContainer);
+				console.log(releaseNameContainer);
+				console.log(recordLabelContainer);
+
+				// Storing the information I want off the response
+				const artistName = release.basic_information.artists[0].name;
+				const releaseName = release.basic_information.title;
+				const recordLabel = release.basic_information.labels[0].name;
+				const releaseImage = release.basic_information.cover_image;
 
 				// Appending the release information to the newly response created card
 				$("#artist-name").append(artistName);
