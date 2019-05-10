@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Random Release</title>
+	<meta name="description" content="Input a Discogs' user name and get returned a random release from the entered user's Discogs collection.">
+	<meta name="author" content="Joshua D. Starkey">
+
+	<!-- Custom Favicon -->
+	<link rel="icon" type="image/png" href="assets/images/blueGem.png">
+
+	<!-- Bootstrap include, with jquery -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+	</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+	</script>
+
+	<!-- bootstrap stylesheet include -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="assets/css/styles.css">
+
+</head>
+
+<body>
+	<h1 class="text-center title">Collection Selector</h1>
+
+	<form id="discogs-form">
+		<div class="input-group mb-3">
+			<input id="username-input" class="username-input" type="text"
+				placeholder="Discogs username">
+			<div class="input-group-prepend">
+				<button id="random-release" class="btn btn-primary random-release" type="submit">Random release</button>
+			</div>
+		</div>
+	</form>
+
+	<div id="release-container">
+		<div class="release-card">
+			<h2 id="artist-name"></h2>
+			<p id="release-name"></p>
+			<p id="record-label"></p>
+		</div>
+	</div>
+
+	<script src="assets/js/scripts.js"></script>
+
+	<!-- Jquery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+
+</html>
