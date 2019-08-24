@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
-	$("#random-release").on("click", function (event) {
+	// $("#random-release").on("click", function (event) {
+	$(document).on("click", "#random-release", function() {
 		event.preventDefault();
 		// creating a username variable, store the entered username
 		const username = $('#username-input').val();
@@ -26,12 +27,6 @@ $(document).ready(function () {
 				const artistNameContainer = $("<h3 id='artist-name' class='card-title'>");
 				const releaseNameContainer = $("<h5 id='release-name' class='card-text'>");
 				const recordLabelContainer = $("<p id='record-label' class='card-text'>");
-				
-				console.log(recordLabelContainer);
-				console.log(cardBody);
-				console.log(artistNameContainer);
-				console.log(releaseNameContainer);
-				console.log(recordLabelContainer);
 
 				// putting all the pieces together
 				responseCard.append(responseCardImage, cardBody, artistNameContainer, releaseNameContainer, recordLabelContainer);
@@ -44,33 +39,38 @@ $(document).ready(function () {
 				const releaseName = release.basic_information.title;
 				const recordLabel = release.basic_information.labels[0].name;
 				const releaseImage = release.basic_information.cover_image;
-				const artistId = release.basic_information.artists[0].id;
-
-				console.log('release image', releaseImage);
+				let releaseId = release.basic_information.id;
 
 				// Appending the release information to the newly response created card
 				$("#artist-name").append(artistName);
 				$("#release-cover").append(releaseImage);
 				$("#release-name").append(releaseName);
 				$("#record-label").append(recordLabel);
+				return releaseId;
+		}).then(function(releaseId) {
+			console.log('release id after passed', releaseId);
+			var bandQueryURL = "https://cors-anywhere.herokuapp.com/https://api.discogs.com/releases/" + releaseId;
 
-				// console.log("Artist name", release.basic_information.artists[0].name);
-				// console.log("Release title", release.basic_information.title);
-				// console.log("Record Label", release.basic_information.labels[0].name);
-		}).then(function(artistId) {
-			getServeBandImage(artistId);
+			$.ajax({
+				url: bandQueryURL,
+				method: "GET"
+			}).then(function (response) {
+				console.log('2nd response', response);
+				// const releaseImage = response.
+				// $("#release-cover").append(releaseImage);
+			});
 		});
 
 	});
 
-	function getServeBandImage(artistId) {
-		var bandQueryURL = "https://api.discogs.com/artists/" + artistId;
+	// function getServedReleaseImage(releaseId) {
+	// 	var bandQueryURL = "https://api.discogs.com/release/" + releaseId;
 
-		$.ajax({
-			url: bandQueryURL,
-			method: "GET"
-		}).then(function () {
-			console.log('artist id', response);
-		});
-	}
+	// 	$.ajax({
+	// 		url: bandQueryURL,
+	// 		method: "GET"
+	// 	}).then(function () {
+	// 		console.log('release id', response);
+	// 	});
+	// }
 });
