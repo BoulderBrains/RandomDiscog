@@ -36,7 +36,7 @@ $(document).ready(function () {
 
 				// Storing the information I want off the response
 				const artistName = release.basic_information.artists[0].name;
-				const releaseName = release.basic_information.title;
+				let releaseName = release.basic_information.title;
 				const recordLabel = release.basic_information.labels[0].name;
 				const releaseImage = release.basic_information.cover_image;
 				let releaseId = release.basic_information.id;
@@ -46,11 +46,22 @@ $(document).ready(function () {
 				$("#release-cover").append(releaseImage);
 				$("#release-name").append(releaseName);
 				$("#record-label").append(recordLabel);
-				return releaseId;
-		}).then(function(releaseId) {
+				console.log(releaseName);
+				const urlFriendlyName = releaseName.split(' ').join('-');
+				console.log(urlFriendlyName);
+				return { releaseId, urlFriendlyName };
+		}).then(function(releaseId, urlFriendlyName) {
 			console.log('release id after passed', releaseId);
-			var bandQueryURL = "https://cors-anywhere.herokuapp.com/https://api.discogs.com/releases/" + releaseId;
+			console.log('urlFiendlyName', releaseId[1]);
+			// currently the URL friendly name is not making it into this then statement
+			// Now that i'm passing an object the whole thing is being returned like
+			// CONSOLE.LOG returns from above:
+			// release id after passed {releaseId: 435537, urlFriendlyName: "Boston's-Finest"}
+			// urlFiendlyName undefined
 
+			// https://www.discogs.com/release/1421848-Mindless-Violence-EP/images
+			var bandQueryURL = "https://cors-anywhere.herokuapp.com/https://api.discogs.com/releases/" + releaseId;
+			// var imageURL = "https://api.discogs.com/release/" + releaseId + RELEASE TITLE + "/images";
 			$.ajax({
 				url: bandQueryURL,
 				method: "GET"
