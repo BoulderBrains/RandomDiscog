@@ -11,6 +11,7 @@ $(document).ready(function () {
 
 		$.ajax({
 			url: queryURL,
+			header: "--user-agent RandomRelease/0.1 +http://adb.example.com",
 			method: "GET"
 		}).then(function (response) {
 				// Pulling a random release off the response
@@ -32,7 +33,7 @@ $(document).ready(function () {
 				responseCard.append(responseCardImage, cardBody, artistNameContainer, releaseNameContainer, recordLabelContainer);
 
 				console.log(responseCard);
-				$("#response-card-container").append(responseCard);
+				$("#response-card-container").empty().append(responseCard);
 
 				// Storing the information I want off the response
 				const artistName = release.basic_information.artists[0].name;
@@ -42,17 +43,17 @@ $(document).ready(function () {
 				let releaseId = release.basic_information.id;
 
 				// Appending the release information to the newly response created card
-				$("#artist-name").append(artistName);
-				$("#release-cover").append(releaseImage);
-				$("#release-name").append(releaseName);
-				$("#record-label").append(recordLabel);
-				console.log(releaseName);
+				$("#artist-name").empty().append(artistName);
+				$("#release-cover").empty().append(releaseImage);
+				$("#release-name").empty().append(releaseName);
+				$("#record-label").empty().append(recordLabel);
+				console.log('releaseName', releaseName);
 				const urlFriendlyName = releaseName.split(' ').join('-');
-				console.log(urlFriendlyName);
+				console.log('urlFriendlyName', urlFriendlyName);
 				return { releaseId, urlFriendlyName };
-		}).then(function(releaseId, urlFriendlyName) {
+		}).then(function (releaseId, urlFriendlyName) {
 			console.log('release id after passed', releaseId);
-			console.log('urlFiendlyName', releaseId[1]);
+			console.log('urlFiendlyName', urlFriendlyName);
 			// currently the URL friendly name is not making it into this then statement
 			// Now that i'm passing an object the whole thing is being returned like
 			// CONSOLE.LOG returns from above:
@@ -61,7 +62,8 @@ $(document).ready(function () {
 
 			// https://www.discogs.com/release/1421848-Mindless-Violence-EP/images
 			var bandQueryURL = "https://cors-anywhere.herokuapp.com/https://api.discogs.com/releases/" + releaseId;
-			// var imageURL = "https://api.discogs.com/release/" + releaseId + RELEASE TITLE + "/images";
+			var imageURL = "https://api.discogs.com/release/" + releaseId[0] + -releaseId[1] + "/images" + "--user-agent RandomRelease/0.1 +http://adb.example.com";
+			console.log('imageURL', imageURL);
 			$.ajax({
 				url: bandQueryURL,
 				method: "GET"
